@@ -257,4 +257,9 @@ public class Prostor {
     public Postava odeberPostavu(String jmeno){
         return postavy.remove(jmeno);
     }
+    
+    @Override
+    public String toString() {
+    	return getNazev();
+    }
 }

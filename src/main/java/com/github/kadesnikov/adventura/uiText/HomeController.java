@@ -56,6 +56,7 @@ public class HomeController extends GridPane implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
+		seznamMistnosti.getItems().clear();
 		seznamMistnosti.getItems().addAll(hra.getHerniPlan().getAktualniProstor().getVychody());
 		
 	}

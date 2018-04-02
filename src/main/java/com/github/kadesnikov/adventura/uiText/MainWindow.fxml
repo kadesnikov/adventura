@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -30,12 +32,22 @@
          </image>
       </ImageView>
       <TextArea fx:id="textVypis" editable="false" prefHeight="234.0" prefWidth="596.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <HBox prefHeight="0.0" prefWidth="575.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <HBox prefHeight="36.0" prefWidth="575.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
             <TextField fx:id="textVstup" onAction="#odesliPrikaz" prefHeight="25.0" prefWidth="531.0" />
             <Button fx:id="odesli" mnemonicParsing="false" onAction="#odesliPrikaz" prefHeight="25.0" prefWidth="44.0" text="Enter" />
          </children>
       </HBox>
       <ListView fx:id="seznamMistnosti" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <ListView prefHeight="200.0" prefWidth="200.0">
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem fx:id="NovaHra" mnemonicParsing="false" text="Nová hra" />
+                  <MenuItem fx:id="Napoveda" mnemonicParsing="false" text="Napověda" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
+      </ListView>
    </children>
 </GridPane>
