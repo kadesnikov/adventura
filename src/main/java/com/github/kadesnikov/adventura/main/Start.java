@@ -17,6 +17,7 @@ import javafx.stage.Stage;
  * @author    Jarmila Pavlíčková
  * @version   ZS 2015/2016
  */
+@SuppressWarnings("restriction")
 public class Start extends Application
 {
     /***************************************************************************
@@ -48,7 +49,7 @@ public class Start extends Application
    	@Override
    	public void start(Stage primaryStage) throws Exception {
    		FXMLLoader loader = new FXMLLoader();
-       	loader.setLocation(getClass().getResource("/MainWindow.fxml"));    	
+       	loader.setLocation(getClass().getResource("/com/github/kadesnikov/adventura/img/MainWindow.fxml"));    	
        	Parent root = loader.load();
 
        	HomeController controller = loader.getController();

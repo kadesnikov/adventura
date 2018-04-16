@@ -37,6 +37,7 @@ import javafx.scene.input.MouseEvent;
  * @author Filip Vencovsky
  *
  */
+@SuppressWarnings("restriction")
 public class HomeController extends GridPane implements Observer {
 	
 	@FXML private TextField textVstup;
