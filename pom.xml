@@ -65,7 +65,7 @@
 
 							<addClasspath>true</addClasspath>
 
-							<mainClass>com.github.filipvencovsky.adventura.main.Start</mainClass>
+							<mainClass>com.github.kadesnikov.adventura.main.Start</mainClass>
 
 						</manifest>
 
