@@ -2,6 +2,7 @@
  * Kontrola kódování: Příliš žluťoučký kůň úpěl ďábelské ódy. */
 package com.github.kadesnikov.adventura.logika;
 
+import java.util.Observable;
 
 /*******************************************************************************
  * Instance třídy PrikazSeber představují ...
@@ -9,12 +10,12 @@ package com.github.kadesnikov.adventura.logika;
  * @author    Jarmila Pavlíčková, Aleksandr Kadesnikov
  * @version   0.00.000
  */
-public class PrikazSeber implements IPrikaz
+public class PrikazSeber extends Observable implements IPrikaz
 {
     //== Datové atributy (statické i instancí)======================================
     private static final String NAZEV = "seber";
     private HerniPlan plan;
-    private Kapsa kapsa;
+    //private Kapsa kapsa;
     // private Batoh batoh; 
     //== Konstruktory a tovární metody =============================================
 
@@ -24,7 +25,7 @@ public class PrikazSeber implements IPrikaz
     public PrikazSeber(HerniPlan plan, Kapsa kapsa)
     {
         this.plan = plan;
-        this.kapsa= kapsa;
+        //this.kapsa= kapsa;
         //batoh = plan.getBatoh();
     }
 
@@ -43,7 +44,8 @@ public class PrikazSeber implements IPrikaz
             return "co mám sebrat?";
         }        
         String nazevSbiraneVeci = parametry[0];        
-        Prostor aktualni = plan.getAktualniProstor();        
+        Prostor aktualni = plan.getAktualniProstor();
+        Kapsa kapsa = plan.getKapsa();
         Vec sbirana = aktualni.odeberVec(nazevSbiraneVeci);  //z aktuálního prostoru se odebere volaná věc 
         
         if(sbirana == null)//pokud sbíraná věc není v prostoru
@@ -55,6 +57,8 @@ public class PrikazSeber implements IPrikaz
             {  if(kapsa.getKapacitaKapsy() <5)//kapacita není plná  
                 {
                kapsa.vlozVecDoKapsy(sbirana);
+               setChanged();
+               notifyObservers();
                return "Vložil jsi do kapsy " + nazevSbiraneVeci;
             }
             else{

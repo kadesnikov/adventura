@@ -50,8 +50,8 @@ public class VecTest
     @Test
     public void testPrenositelnost()
     {
-        Vec vec1 = new Vec("whiskey", true);
-        Vec vec2 = new Vec("stůl", false);
+        Vec vec1 = new Vec("whiskey", true,"tuzka.png");
+        Vec vec2 = new Vec("stůl", false,"tuzka.png");
         assertEquals(true, vec1.jePrenositelna());
         assertEquals(false, vec2.jePrenositelna());
     }
@@ -62,7 +62,7 @@ public class VecTest
     @Test
     public void testNazev()
     {
-        Vec vec1 = new Vec("Max", true);
+        Vec vec1 = new Vec("Max", true,"tuzka.png");
         assertEquals("Max", vec1.getNazev());
        
     }

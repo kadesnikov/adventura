@@ -53,13 +53,13 @@ public class KapsaTest
     public void testKapsy()
     {
         Kapsa kapsa = new Kapsa();
-        Vec vec1 = new Vec("1",true);
-        Vec vec2 = new Vec("2",true);
-        Vec vec3 = new Vec("3",true);
-        Vec vec4 = new Vec("4",true);
-        Vec vec5 = new Vec("5",true);
-        Vec vec6 = new Vec("6",true);
-        Vec vec7 = new Vec("7",true);
+        Vec vec1 = new Vec("1",true,"tuzka.png");
+        Vec vec2 = new Vec("2",true,"tuzka.png");
+        Vec vec3 = new Vec("3",true,"tuzka.png");
+        Vec vec4 = new Vec("4",true,"tuzka.png");
+        Vec vec5 = new Vec("5",true,"tuzka.png");
+        Vec vec6 = new Vec("6",true,"tuzka.png");
+        Vec vec7 = new Vec("7",true,"tuzka.png");
         kapsa.vlozVecDoKapsy(vec1);
         kapsa.vlozVecDoKapsy(vec2);
         kapsa.vlozVecDoKapsy(vec3);

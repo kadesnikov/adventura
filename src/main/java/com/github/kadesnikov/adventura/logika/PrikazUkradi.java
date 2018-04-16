@@ -1,5 +1,6 @@
 package com.github.kadesnikov.adventura.logika;
 
+import java.util.Observable;
 
 /**
  * Write a description of class PrikazDej here.
@@ -7,7 +8,7 @@ package com.github.kadesnikov.adventura.logika;
  * @author Aleksanr Kadesnikov 
  * @version prosinec 2016
  */
-public class PrikazUkradi implements IPrikaz
+public class PrikazUkradi extends Observable implements IPrikaz
 {
     // instance variables - replace the example below with your own
     private HerniPlan plan;
@@ -43,7 +44,7 @@ public class PrikazUkradi implements IPrikaz
             return "Koho chceš okrast? A co?\n"+
             "Píš takhle: ukradi věc postava";  
         }
-        Vec klic = new Vec("klic",true);
+        Vec klic = new Vec("klic",true,"klic.png");
         Prostor aktualni = plan.getAktualniProstor();
         String darovanaVec = parametry[0];
         String jmeno = parametry[1];
@@ -54,6 +55,8 @@ public class PrikazUkradi implements IPrikaz
             }
          if (jmeno.equals("boss") && darovanaVec.equals("klic") && postava.getJmeno().equals("boss") )//pokud boss je v mistnosti
         {   kapsa.vlozVecDoKapsy(klic);
+        setChanged();
+        notifyObservers();
             return "Okradl jsi bossa! Utíkej!";
         }
         return "Postava tohle nemá, ukrást není možné";

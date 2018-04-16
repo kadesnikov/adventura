@@ -55,6 +55,16 @@ public interface IHra
      *  @return     odkaz na herní plán
      */
      public HerniPlan getHerniPlan();
+     
+     /**
+     *  Metoda vrátí odkaz na kapsu, je využita hlavně v testech,
+     *  kde se jejím prostřednictvím získává aktualní místnost hry.
+     *  
+     *  @return     odkaz na kapsu
+     */
+     public Kapsa getKapsa();
+     
+     
     
     //== ZDĚDĚNÉ METODY ========================================================
     //== INTERNÍ DATOVÉ TYPY ===================================================

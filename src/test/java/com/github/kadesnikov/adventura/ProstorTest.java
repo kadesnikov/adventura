@@ -1,5 +1,4 @@
 package com.github.kadesnikov.adventura;
-import com.github.kadesnikov.adventura.logika.*;
 
 
 import org.junit.After;
@@ -52,8 +51,8 @@ public class ProstorTest
      */
     @Test
     public  void testLzeProjit() {		
-        Prostor prostor1 = new Prostor("hala", "vstupní hala budovy VŠE na Jižním městě");
-        Prostor prostor2 = new Prostor("bufet", "bufet, kam si můžete zajít na svačinku");
+        Prostor prostor1 = new Prostor("hala", "vstupní hala budovy VŠE na Jižním městě",0.0,0.0);
+        Prostor prostor2 = new Prostor("bufet", "bufet, kam si můžete zajít na svačinku",0.0,0.0);
         prostor1.setVychod(prostor2);
         prostor2.setVychod(prostor1);
         assertEquals(prostor2, prostor1.vratSousedniProstor("bufet"));
@@ -64,9 +63,9 @@ public class ProstorTest
     @Test
     public void testVeci()
     {
-    	com.github.kadesnikov.adventura.logika.Prostor prostor1 = new com.github.kadesnikov.adventura.logika.Prostor(null, null);
-    	com.github.kadesnikov.adventura.logika.Vec vec1 = new com.github.kadesnikov.adventura.logika.Vec("a", true);
-    	com.github.kadesnikov.adventura.logika.Vec vec2 = new com.github.kadesnikov.adventura.logika.Vec("b", false);
+    	com.github.kadesnikov.adventura.logika.Prostor prostor1 = new com.github.kadesnikov.adventura.logika.Prostor(null, null,0.0,0.0);
+    	com.github.kadesnikov.adventura.logika.Vec vec1 = new com.github.kadesnikov.adventura.logika.Vec("a", true,"tuzka.png");
+    	com.github.kadesnikov.adventura.logika.Vec vec2 = new com.github.kadesnikov.adventura.logika.Vec("b", false,"tuzka.png");
         prostor1.vlozVec(vec1);
         prostor1.vlozVec(vec2);
         assertSame(vec1, prostor1.odeberVec("a"));

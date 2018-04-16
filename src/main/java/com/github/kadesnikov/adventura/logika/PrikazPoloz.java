@@ -1,5 +1,6 @@
 package com.github.kadesnikov.adventura.logika;
 
+import java.util.Observable;
 
 /**
  * Write a description of class PrikazPoloz here.
@@ -7,11 +8,10 @@ package com.github.kadesnikov.adventura.logika;
  * @author Alex Kadesnikov 
  * @version 12.2016
  */
-public class PrikazPoloz implements IPrikaz
+public class PrikazPoloz extends Observable implements IPrikaz
 {
     // instance variables - replace the example below with your own
     private HerniPlan plan;
-    private Kapsa kapsa;
     private static final String NAZEV = "poloz";
 
     /**
@@ -20,7 +20,6 @@ public class PrikazPoloz implements IPrikaz
     public PrikazPoloz(HerniPlan plan, Kapsa kapsa)
     {
         this.plan = plan;
-        this.kapsa = kapsa;
     }
 
     /**
@@ -39,7 +38,11 @@ public class PrikazPoloz implements IPrikaz
         }
         String nazevPokladaneVeci = parametry[0];
         Prostor aktualni = plan.getAktualniProstor();  
-        Vec pokladana = kapsa.vyberVecZKapsy(nazevPokladaneVeci); //automaticky se z kapsy odebere pokládaná věc
+        Kapsa kapsa = plan.getKapsa();
+        Vec pokladana = kapsa.vyberVecZKapsy(nazevPokladaneVeci);
+        setChanged();
+        notifyObservers();
+        //automaticky se z kapsy odebere pokládaná věc
 
         if (pokladana == null) //pokud v kapse pokládaná věc nebyla, tak logicky nelze položit
         {

@@ -16,14 +16,15 @@ import java.util.stream.Collectors;
  * @author Michael Kolling, Lubos Pavlicek, Jarmila Pavlickova
  * @version pro školní rok 2015/2016 LS
  */
-public class Prostor {
+public class Prostor extends Observable{
 
     private String nazev;
     private String popis;
-    private String postava;
     private Set<Prostor> vychody;   // obsahuje sousední místnosti
     private Map<String, Vec> veci;
     private Map<String, Postava> postavy;
+    private double x;
+    private double y;
     /**
      * Vytvoření prostoru se zadaným popisem, např. "kuchyň", "hala", "trávník
      * před domem"
@@ -32,12 +33,14 @@ public class Prostor {
      * víceslovný název bez mezer.
      * @param popis Popis prostoru.
      */
-    public Prostor(String nazev, String popis) {
+    public Prostor(String nazev, String popis, double x, double y) {
         this.nazev = nazev;
         this.popis = popis;
         vychody = new HashSet<>();
         veci = new HashMap<>();
         postavy = new HashMap<>();
+        this.x = x;
+        this.y= y;
     }
 
     /**
@@ -97,6 +100,7 @@ public class Prostor {
         int hashNazvu = java.util.Objects.hashCode(this.nazev);
         vysledek = 37 * vysledek + hashNazvu;
         return vysledek;
+        
     }
       
 
@@ -209,10 +213,20 @@ public class Prostor {
     }
     
     /**
+     * vytvoření vlastní kolekce věcí
+     */
+    public Collection<Vec> getVeci() {
+    	return Collections.unmodifiableCollection(veci.values());
+    	
+    }
+    
+    /**
      * vytvoření vlastního příkazu vlož věc
      */
     public void vlozVec(Vec neco){
         veci.put(neco.getNazev(),neco);
+        setChanged();
+        notifyObservers();
     }
    
     /**
@@ -223,6 +237,8 @@ public class Prostor {
     public Vec najdiVec(String nazev)
     {
         return veci.get(nazev);
+        
+        
     }
     
     /**
@@ -247,7 +263,10 @@ public class Prostor {
      * @return odebere věc
      */
     public Vec odeberVec(String nazev){
-        return veci.remove(nazev);
+        Vec x = veci.remove(nazev);
+        setChanged();
+        notifyObservers();
+        return x;
     }
     
      /**
@@ -258,6 +277,44 @@ public class Prostor {
         return postavy.remove(jmeno);
     }
     
+    /**
+     * Metody vracejí koodrinaty hrače
+     */
+    public double getX() {
+		return x;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+	
+	 /**
+     * Metoda pro získání předmětů v prostoru
+     * 
+     * @return  vrací předměty z prostoru
+     */
+    public Map<String, Vec> getVeciMap(){
+    	return veci;
+    }
+    
+    /**
+     * Vratí věc
+     */
+    public Vec getVec(String nazevPredmetu) {
+        return veci.get(nazevPredmetu);
+     }  
+    
+    /**
+     * Vrátí název
+     */
     @Override
     public String toString() {
     	return getNazev();

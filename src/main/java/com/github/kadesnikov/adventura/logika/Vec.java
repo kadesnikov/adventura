@@ -2,7 +2,7 @@
  * Kontrola kódování: Příliš žluťoučký kůň úpěl ďábelské ódy. */
 package com.github.kadesnikov.adventura.logika;
 
-
+import java.util.Observable;
 
 /*******************************************************************************
  * Instance třídy Vec představují ...
@@ -10,11 +10,12 @@ package com.github.kadesnikov.adventura.logika;
  * @author    Alex Kadesnikov
  * @version   12.2016
  */
-public class Vec
+public class Vec extends Observable
 {
     //== Datové atributy (statické i instancí)======================================
     private String nazev;
     private boolean prenositelnost;
+    private String obrazek;
     //== Konstruktory a tovární metody =============================================
 
     /***************************************************************************
@@ -25,10 +26,11 @@ public class Vec
      * víceslovný název bez mezer.
      * @param přenositelnost určení přenositelnosti.
      */
-    public Vec(String nazev, boolean prenositelnost)
+    public Vec(String nazev, boolean prenositelnost, String obrazek)
     {
         this.nazev = nazev;
         this.prenositelnost = prenositelnost;
+        this.obrazek = obrazek;
     }
 
     //== Nesoukromé metody (instancí i třídy) ======================================
@@ -47,7 +49,18 @@ public class Vec
     public boolean jePrenositelna(){
         return prenositelnost;
     }
+    
+    @Override
+	public String toString() {
+		return getNazev();
+	}
 
     //== Soukromé metody (instancí i třídy) ========================================
+    /**
+     * Vypíše cestu k obrázku
+     */
+    public String getObrazek() {
+        return obrazek;
+    }
 
 }

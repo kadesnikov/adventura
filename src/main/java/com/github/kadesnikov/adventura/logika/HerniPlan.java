@@ -1,6 +1,7 @@
 package com.github.kadesnikov.adventura.logika;
 
 import java.util.Observable;
+
 /**
  *  Class HerniPlan - třída představující mapu a stav adventury.
  * 
@@ -18,7 +19,9 @@ public class HerniPlan extends Observable{
     private Prostor prostorOchrana;
     private Prostor prostorReditel;
     private Prostor prostorHriste;
+    private Kapsa kapsa;
     private final static String VITEZNA = "vychod";
+
     
      /**
      *  Konstruktor který vytváří jednotlivé prostory a propojuje je pomocí východů.
@@ -26,6 +29,7 @@ public class HerniPlan extends Observable{
      */
     public HerniPlan() {
         zalozProstoryHry();
+        kapsa = new Kapsa();
 
     }
     /**
@@ -34,14 +38,14 @@ public class HerniPlan extends Observable{
      */
     private void zalozProstoryHry() {
         // vytvářejí se jednotlivé prostory
-        Prostor vychod = new Prostor(VITEZNA, "tvoje šance na útěk! běž co nejrychleji!!!");
-        Prostor menza = new Prostor("menza","jídelna pro odsouzení lidi");
-        Prostor nemocnice = new Prostor("nemocnice","nemocnice... jediné možné místo s ženama");
-        Prostor pokoj = new Prostor("pokoj","tvůj pokoj. místo kde budeš trávit celý život, pokud neutečeš");
-        Prostor chodba = new Prostor("chodba","chodba. toto jsi vždycky viděl ve filmech, dvoupatrový prostor s chodbou a pokoji");
-        Prostor hriste = new Prostor("hříště","klasické hříště s košíkovou");
-        Prostor ochrana = new Prostor("ochrana","ochrana. tam by se jít nikomu nechtělo, pokud nechceš mít problémy, nebo útect :)");
-        Prostor reditel = new Prostor("ředitel","ředitelův kancelář");
+        Prostor vychod = new Prostor(VITEZNA, "tvoje šance na útěk! běž co nejrychleji!!!", 500.0, 300.0);
+        Prostor menza = new Prostor("menza","jídelna pro odsouzení lidi", 150.0, 280.0);
+        Prostor nemocnice = new Prostor("nemocnice","nemocnice... jediné možné místo s ženama", 280.0, 50.0);
+        Prostor pokoj = new Prostor("pokoj","tvůj pokoj. místo kde budeš trávit celý život, pokud neutečeš", 12.0, 150.0);
+        Prostor chodba = new Prostor("chodba","chodba. toto jsi vždycky viděl ve filmech, dvoupatrový prostor s chodbou a pokoji", 150.0, 150.0);
+        Prostor hriste = new Prostor("hříště","klasické hříště s košíkovou", 280.0, 150.0);
+        Prostor ochrana = new Prostor("ochrana","ochrana. tam by se jít nikomu nechtělo, pokud nechceš mít problémy, nebo útect :)", 330.0, 170.0);
+        Prostor reditel = new Prostor("ředitel","ředitelův kancelář", 430.0, 200.0);
 
 
         // přiřazují se průchody mezi prostory (sousedící prostory)
@@ -64,16 +68,16 @@ public class HerniPlan extends Observable{
         Postava strom = new Postava("strom");
         
         //věci ve hře
-        Vec tuzka = new Vec("tužka",true);
-        Vec postel = new Vec ("postel", false);
+        Vec tuzka = new Vec("tužka",true,"/com/github/kadesnikov/adventura/img/tuzka.png");
+        Vec postel = new Vec ("postel", false,"/com/github/kadesnikov/adventura/img/postel.png");
         //Vec klic = new Vec ("klic", true);
-        Vec zapalka = new Vec("zápalka",true);
-        Vec vodka = new Vec ("vodka", true);
-        Vec jod = new Vec("jód",true);
-        Vec stul = new Vec ("stůl", false);
-        Vec mic= new Vec ("míč", true);
-        Vec vidlice = new Vec("vidlice",true);
-        Vec konvice = new Vec ("konvice", true);
+        Vec zapalka = new Vec("zápalka",true,"/com/github/kadesnikov/adventura/img/zapalka.png");
+        Vec vodka = new Vec ("vodka", true,"/com/github/kadesnikov/adventura/img/vodka.png");
+        Vec jod = new Vec("jód",true,"/com/github/kadesnikov/adventura/img/jod.png");
+        Vec stul = new Vec ("stůl", false,"/com/github/kadesnikov/adventura/img/stul.png");
+        Vec mic= new Vec ("míč", true,"/com/github/kadesnikov/adventura/img/mic.png");
+        Vec vidlice = new Vec("vidlice",true,"/com/github/kadesnikov/adventura/img/vidlice.png");
+        Vec konvice = new Vec ("konvice", true,"/com/github/kadesnikov/adventura/img/konvice.png");
         
         
         //umístění věcí
@@ -97,7 +101,7 @@ public class HerniPlan extends Observable{
         prostorReditel = reditel;
         prostorOchrana = ochrana;
         
-        aktualniProstor = pokoj;  // hra začíná v mistnosti pokoj    
+        aktualniProstor = pokoj;  // hra začíná v mistnosti pokoj  
     }
     
     /**
@@ -109,6 +113,18 @@ public class HerniPlan extends Observable{
     public Prostor getAktualniProstor() {
         return aktualniProstor;
     }
+    
+    
+    /**
+     *  Metoda vrací odkaz na kapsu.
+     *
+     *@return     kapsa
+     */
+    
+    public Kapsa getKapsa() {
+        return kapsa;
+    }
+    
     
     /**
      *  Metoda vrací odkaz na prostor ochrana.

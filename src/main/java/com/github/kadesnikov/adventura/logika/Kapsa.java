@@ -1,5 +1,7 @@
 package com.github.kadesnikov.adventura.logika;
 import java.util.Map;
+import java.util.Observable;
+
 import java.util.HashMap;
 
 
@@ -9,8 +11,7 @@ import java.util.HashMap;
  * @author Alex Kadesnikov 
  * @version 12.2016
  */
-public class Kapsa
-{
+public class Kapsa extends Observable{
     // instance variables - replace the example below with your own
     private static final int KAPACITA = 5 ;
     private Map<String, Vec> seznamVeci ;
@@ -35,6 +36,8 @@ public class Kapsa
     public boolean vlozVecDoKapsy (Vec vec) {
         if (seznamVeci.size() < KAPACITA ) {
             seznamVeci.put(vec.getNazev(), vec);
+            setChanged();
+            notifyObservers();
             return true;
         }
         return false;
@@ -53,6 +56,8 @@ public class Kapsa
         if (seznamVeci.containsKey(jmenoVeci)) {
             nalezenaVec = seznamVeci.get(jmenoVeci);
             seznamVeci.remove(jmenoVeci);
+            setChanged();
+            notifyObservers();
             return nalezenaVec;
         }
         return null;
@@ -65,9 +70,22 @@ public class Kapsa
         for (String jmenoVeci : seznamVeci.keySet()){
             nazvy += jmenoVeci + " ";
         }
+        setChanged();
+        notifyObservers();
         return nazvy;
 
     }
+    
+    /**
+     * Metoda pro získání předmětů z kapsy
+     * 
+     * @return  vrací předměty z kapsy
+     */
+    public Map<String, Vec> getPredmety(){
+    	return seznamVeci;
+    }
+    
+    
     /**
      * Vypíše kolik věcí v kapse je
      */
@@ -75,5 +93,22 @@ public class Kapsa
         return seznamVeci.size();
 
     }
+	
+    /**
+     * Vratí nutnou věc
+     */
+    public Vec getVec(String nazevPredmetu) {
+        return seznamVeci.get(nazevPredmetu);
+     }  
+    
+    /**
+     * Metoda, která vrací předměty
+     * @return vrácená hodnota předmětů
+     */ 
+@Override
+       public String toString()
+       {
+           return seznamVeciVKapse();
+       }
     
 }
